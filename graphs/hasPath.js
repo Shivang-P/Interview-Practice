@@ -1,16 +1,30 @@
 //Return a boolean that represents whether a directed, acyclic, graph has a path between a given
 //start node and end node.
 
+// function hasPath(graph, start, end) {
+//     let stack = [ start ];
+//     while(stack.length > 0) {
+//         let current = stack.pop();
+//         if(current == end) {
+//             return true;
+//         }
+
+//         for(let neighbour of graph[current]) {
+//             stack.push(neighbour);
+//         }
+//     }
+//     return false;
+// }
+
 function hasPath(graph, start, end) {
-    let stack = [ start ];
-    while(stack.length > 0) {
-        let current = stack.pop();
+    let queue = [ start ];
+    while(queue.length > 0) {
+        let current = queue.shift();
         if(current == end) {
             return true;
         }
-
         for(let neighbour of graph[current]) {
-            stack.push(neighbour);
+            queue.push(neighbour);
         }
     }
     return false;
