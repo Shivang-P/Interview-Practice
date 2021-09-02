@@ -12,25 +12,18 @@ function getAdjacencyList(edgeList) {
     return graph;
 }
 
-function hasPath(graph, start, end) {
-    let stack = [ start ];
-    let visited = new Set();
+function hasPath(graph, start, end, visited) {
+    if(visited.has(start)) return false;
+    if(start == end) return true;
+
     visited.add(start);
-
-    while(stack.length > 0) {
-        let current = stack.pop();
-
-        if(current == end) {
+    for(let neighbour of graph[start]) {
+        if(hasPath(graph, neighbour, end, visited)) {
             return true;
         }
-
-        for(let neighbour of graph[current]) {
-            if(!visited.has(neighbour)) {
-                stack.push(neighbour);
-                visited.add(neighbour);
-            }
-        }
     }
+
+    return false;
 }
 
 let edges = [
